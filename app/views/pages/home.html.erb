@@ -1,11 +1,15 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
 
-<p>
-  <%= display_username %>
-</p>
-
+<h2>Users: </h2>
+<%= render "user_list", users: @users %>
+<h2>Admins: </h2>
+<%= render "user_list", users: @admins %>
+<% if admin_signed_in? || user_signed_in? %>
+  <p>
+    <%= link_to 'Products', products_path %>
+  </p>
+<% end %>
 <% if admin_signed_in? %>
+  <hr>
   <%= link_to 'Edit User', edit_admin_registration_path %>
   <%= button_to 'Sign Out', destroy_admin_session_path, method: :delete %>
 <% elsif user_signed_in? %>
@@ -14,4 +18,7 @@
 <% else %>
   <%= link_to 'User Sign In', new_user_session_path %>
   <%= link_to 'User Sign Up', new_user_registration_path %>
+  <hr>
+  <%= link_to 'Admin Sign In', new_admin_session_path %>
+  <%= link_to 'Admin Sign Up', new_admin_registration_path %>
 <% end %>

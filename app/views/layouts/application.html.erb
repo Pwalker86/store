@@ -17,6 +17,15 @@
   </head>
 
   <body>
+    <div>
+      <div>
+        Logged in as:
+        <%= display_username %>
+      </div>
+      <div>
+        <%= link_to 'Home', pages_home_path %>
+      </div>
+    </div>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
