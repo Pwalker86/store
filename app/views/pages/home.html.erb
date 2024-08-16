@@ -1,2 +1,17 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+<p>
+  <%= display_username %>
+</p>
+
+<% if admin_signed_in? %>
+  <%= link_to 'Edit User', edit_admin_registration_path %>
+  <%= button_to 'Sign Out', destroy_admin_session_path, method: :delete %>
+<% elsif user_signed_in? %>
+  <%= link_to 'Edit Profile', edit_user_registration_path %>
+  <%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'User Sign In', new_user_session_path %>
+  <%= link_to 'User Sign Up', new_user_registration_path %>
+<% end %>
