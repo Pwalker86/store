@@ -1,0 +1,7 @@
+<div class="OrderShow__quantity-control" data-product-id="<%= item.product.id %>">
+  <select class="OrderShow__quantity-select" data-product-id="<%= item.product.id %>">
+    <% (1..10).each do |quantity| %>
+      <option value="<%= quantity %>" <%= 'selected' if quantity == item.quantity %>><%= quantity %></option>
+    <% end %>
+  </select>
+</div>

@@ -3,12 +3,11 @@
   <div>
     <h4>Order Items</h4>
     <ul>
-      <% @order.order_items.each do |order_item| %>
+      <% @order.order_items.each do |item| %>
         <li>
-          <%= order_item.product.name %>
-          <%= order_item.quantity %>
-          <%= order_item.product.price %>
-          <%= link_to 'Delete', order_item_path(order_item), data: {turbo_method: :delete} %>
+          <%= item.product.name %>
+          <%= number_to_currency(item.product.price) %>
+          <%= render 'qty_incrementor', item: item %>
         </li>
       <% end %>
     </ul>
