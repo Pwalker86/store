@@ -1,7 +1,7 @@
 <%= render @product %>
 
 <div>
-  <%= button_to 'Add to Order', order_items_path(product_id: @product.id), data: {turbo_method: :post} %>
+  <%= button_to 'Add to Order', order_item_path(product_id: @product.id, qty: 1), method: :put %>
   <%= link_to "Edit this product", edit_product_path(@product) %> |
   <%= link_to "Back to products", products_path %>
 

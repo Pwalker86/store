@@ -36,7 +36,6 @@ gem "bootsnap", require: false
 gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  gem 'pry-rails'
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
@@ -58,5 +57,5 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
-
 gem "sassc", "~> 2.4"
+gem "dartsass-rails", "~> 0.5.1"
