@@ -1,8 +1,10 @@
 <div>
   <ul>
     <% users.each do |user| %>
-      <li><%= user.username %></li>
-      <li><%= user.email %></li>
+      <li>
+        <div>Username: <%= user.username %></div>
+        <div>Email: <%= user.email %></div>
+      </li>
     <% end %>
   </ul>
 </div>

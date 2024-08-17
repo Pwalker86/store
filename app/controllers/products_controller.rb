@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_admin!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_product, only: %i[ show edit update destroy ]
 
   # GET /products or /products.json
@@ -62,6 +62,13 @@ class ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def ensure_admin!
+      unless admin_signed_in?
+        flash[:alert] = "You must be an admin to access this page."
+        redirect_to pages_home_path
+      end
     end
 
     # Only allow a list of trusted parameters through.
