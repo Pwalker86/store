@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || "Ammo Store" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,8 +18,8 @@
 
   <body>
     <%= render 'layouts/navbar' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= render 'layouts/toast' %>
+    <p style="color: red" class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>

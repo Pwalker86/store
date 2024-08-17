@@ -1,4 +1,4 @@
-<div id="<%= dom_id product %>">
+<div id="<%= dom_id product %>" class="Product__Card">
   <p>
     <strong>Name:</strong>
     <%= product.name %>
@@ -14,9 +14,9 @@
     <%= product.description %>
   </p>
 
-  <p>
-    <strong>Out of stock:</strong>
-    <%= product.out_of_stock %>
-  </p>
-
+  <% if current_page?(products_path) %>
+    <p>
+      <%= link_to "View", product, class: 'button-link' %>
+    </p>
+  <% end %>
 </div>

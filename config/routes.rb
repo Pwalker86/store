@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
-  get 'orders/create'
-  get 'orders/update'
-  get 'orders/destroy'
-  get 'orders/index'
+  resources :order_items
+  resources :orders
   resources :products
   devise_for :users
   devise_for :admins

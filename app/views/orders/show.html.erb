@@ -1,0 +1,16 @@
+<div>
+  <h3>Order: <%= @order.id %></h3>
+  <div>
+    <h4>Order Items</h4>
+    <ul>
+      <% @order.order_items.each do |order_item| %>
+        <li>
+          <%= order_item.product.name %>
+          <%= order_item.quantity %>
+          <%= order_item.product.price %>
+          <%= link_to 'Delete', order_item_path(order_item), data: {turbo_method: :delete} %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

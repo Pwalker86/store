@@ -1,0 +1,15 @@
+<% if notice.present? %>
+  <div class="toast-notice" id="toast-notice">
+    <%= notice %>
+    <button class="toast-close">&times;</button>
+  </div>
+  <script>
+      setTimeout(function() {
+          const toast = document.getElementById('toast-notice');
+          toast.classList.add('fade-out');
+          setTimeout(function() {
+              toast.style.display = 'none';
+          }, 1000); // Match the duration of the CSS transition
+      }, 1000);
+  </script>
+<% end %>
