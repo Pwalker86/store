@@ -1,6 +1,5 @@
 <div class="OrderShow__quantity-control" data-product-id="<%= item.product.id %>">
-  <%# TODO: add check if quantity will go to 0. Give a confirm dialogue in that case %>
-  <%= button_to '-', order_item_path(product_id: item.product.id, qty: -1), method: :put,class: "OrderShow__quantity-btn minus" %>
+  <%= button_to '-', order_item_path(product_id: item.product.id, qty: -1), method: :put, class: "OrderShow__quantity-btn minus" %>
   <span class="OrderShow__quantity-display"><%= item.quantity %></span>
   <%= button_to '+', order_item_path(product_id: item.product.id, qty: 1), method: :put, class: "OrderShow__quantity-btn plus" %>
 </div>
