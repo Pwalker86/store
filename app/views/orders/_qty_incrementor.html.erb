@@ -1,5 +1,9 @@
 <div class="OrderShow__quantity-control" data-product-id="<%= item.product.id %>">
-  <%= button_to '-', order_item_path(product_id: item.product.id, qty: -1), method: :put, class: "OrderShow__quantity-btn minus" %>
+  <% if order.open? %>
+    <%= button_to '-', order_item_path(product_id: item.product.id, qty: -1), method: :put, class: "OrderShow__quantity-btn minus" %>
+  <% end %>
   <span class="OrderShow__quantity-display"><%= item.quantity %></span>
-  <%= button_to '+', order_item_path(product_id: item.product.id, qty: 1), method: :put, class: "OrderShow__quantity-btn plus" %>
+  <% if order.open? %>
+    <%= button_to '+', order_item_path(product_id: item.product.id, qty: 1), method: :put, class: "OrderShow__quantity-btn plus" %>
+  <% end %>
 </div>

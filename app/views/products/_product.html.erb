@@ -15,7 +15,7 @@
   </p>
 
   <% if user_signed_in? %>
-    <%= button_to 'Add to Order', order_item_path(id:@order.id, product_id: product.id, qty: 1), method: :put %>
+    <%= button_to 'Add to Order', order_item_path(id:@open_order.id, product_id: product.id, qty: 1), method: :put %>
   <% end %>
   <% if current_page?(products_path) %>
     <p>

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   resources :order_items, only: [:create, :update, :destroy]
   resources :orders
+  post "orders/submit", to: "orders#submit", as: "submit_order"
   resources :products
   devise_for :users
   devise_for :admins
 
   root to: "pages#home"
-  get 'pages/home'
+  get "pages/home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

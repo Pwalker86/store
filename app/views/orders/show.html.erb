@@ -6,10 +6,14 @@
       <% @order.sorted_order_items.each do |item| %>
         <li>
           <%= item.product.name %>
-          <%= number_to_currency(item.product.price) %>
-          <%= render 'qty_incrementor', item: item %>
+          <%= number_to_currency(item.price) %>
+          <%= render 'qty_incrementor', item: item, order: @order %>
         </li>
       <% end %>
     </ul>
+    <div>Total: <%= @order.total_price %></div>
+    <% if @order.status == 'open' %>
+      <%= button_to 'Checkout', submit_order_path, method: :post %>
+    <% end %>
   </div>
 </div>
