@@ -1,9 +1,13 @@
 <div class="OrderShow__quantity-control" data-product-id="<%= item.product.id %>">
   <% if order.open? %>
-    <%= button_to '-', order_item_path(product_id: item.product.id, qty: -1), method: :put, class: "OrderShow__quantity-btn minus" %>
+    <%= form_with model: item, url: order_item_path(product_id: item.product.id, quantity: -1), method: :put, html: { class: 'minus-form' } do |f| %>
+      <%= f.submit '-', class: "OrderShow__quantity-btn minus" %>
+    <% end %>
   <% end %>
   <span class="OrderShow__quantity-display"><%= item.quantity %></span>
   <% if order.open? %>
-    <%= button_to '+', order_item_path(product_id: item.product.id, qty: 1), method: :put, class: "OrderShow__quantity-btn plus" %>
+    <%= form_with model: item, url: order_item_path(product_id: item.product.id, quantity: 1), method: :put, html: { class: 'plus-form' } do |f| %>
+      <%= f.submit '+', class: "OrderShow__quantity-btn plus" %>
+    <% end %>
   <% end %>
 </div>

@@ -2,7 +2,7 @@ class OrderItemsController < ApplicationController
   def create
     @product = Product.find(params[:product_id])
     @order_item = @open_order.order_items.find_or_create_by(product: @product)
-    @order_item.quantity += params[:qty].to_i
+    @order_item.quantity += params[:quantity].to_i
 
     if @order_item.save
       redirect_to @open_order, notice: 'Product was successfully added to your order.'
@@ -14,7 +14,7 @@ class OrderItemsController < ApplicationController
   def update
     @product = Product.find(params[:product_id])
     @order_item = @open_order.order_items.find_or_initialize_by(product: @product)
-    @order_item.quantity += params[:qty].to_i
+    @order_item.quantity += params[:quantity].to_i
 
     if @order_item.quantity <= 0
       @order_item.destroy
@@ -27,10 +27,16 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    if @order.order_items.find(params[:id]).destroy
+    if @order.order_items.find(params[:product_id]).destroy
       redirect_to @order, notice: 'Product was successfully removed from your order.'
     else
       redirect_to @order, alert: 'There was an error removing the product from your order.'
     end
+  end
+
+  private
+
+  def order_item_params
+    params.require(:order_item).permit(:product_id, :quantity)
   end
 end
