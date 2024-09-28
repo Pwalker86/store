@@ -58,3 +58,4 @@ end
 gem "devise", "~> 4.9"
 gem "sassc", "~> 2.4"
 gem "dartsass-rails", "~> 0.5.1"
+gem 'draper'
