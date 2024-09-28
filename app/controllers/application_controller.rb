@@ -4,9 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, prepend: true
 
   protected
-  # @return [Order]
+  # @returns decorated [Order]
   def ensure_open_order
-    @open_order = current_user.orders.find_or_create_by(status: "open")
+    @open_order = OrderDecorator.decorate(current_user.orders.find_or_create_by(status: "open"))
   end
 
   def configure_permitted_parameters

@@ -8,9 +8,10 @@ class OrdersController < ApplicationController
     end
   end
 
-  # @return [Order]
+  # @return decorated [Order]
   def show
     @order = Order.find(order_params[:id])
+    @order = OrderDecorator.decorate(@order)
   end
 
   def submit
