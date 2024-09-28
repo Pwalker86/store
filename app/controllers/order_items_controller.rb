@@ -12,9 +12,11 @@ class OrderItemsController < ApplicationController
   end
 
   def update
-    @product = Product.find(params[:product_id])
+    @product = Product.find(order_item_params[:order_item][:product_id])
+    # Use find_or_initialize_by so that if the order item already exists on the order, 
+    # it will update the quantity instead of creating a new order item.
     @order_item = @open_order.order_items.find_or_initialize_by(product: @product)
-    @order_item.quantity += params[:quantity].to_i
+    @order_item.quantity += order_item_params[:order_item][:quantity].to_i
 
     if @order_item.quantity <= 0
       @order_item.destroy
@@ -26,17 +28,9 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  def destroy
-    if @order.order_items.find(params[:product_id]).destroy
-      redirect_to @order, notice: 'Product was successfully removed from your order.'
-    else
-      redirect_to @order, alert: 'There was an error removing the product from your order.'
-    end
-  end
-
   private
 
   def order_item_params
-    params.require(:order_item).permit(:product_id, :quantity)
+    params.require(:order).permit(order_item: [:product_id, :quantity])
   end
 end

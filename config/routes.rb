@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  resources :order_items, only: [:create, :update, :destroy]
-  resources :orders
-  post "orders/submit", to: "orders#submit", as: "submit_order"
+  resources :orders do
+    post "submit", on: :collection, as: "submit"
+    resources :order_items, only: [:create, :update], as: "items"
+  end
+
   resources :products
+
   devise_for :users
   devise_for :admins
 
@@ -13,7 +16,4 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end
