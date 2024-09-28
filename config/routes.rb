@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :orders do
-    post "submit", on: :collection, as: "submit"
+  resources :orders, only: [:index, :show, :update] do
+    post "submit", as: "submit"
     resources :order_items, only: [:create, :update], as: "items"
   end
 

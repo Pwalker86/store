@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+
   # @return [ActiveRecord::Relation<Order>]
   def index
     if user_signed_in?
@@ -9,7 +10,7 @@ class OrdersController < ApplicationController
 
   # @return [Order]
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find(order_params[:id])
   end
 
   def submit
@@ -25,12 +26,12 @@ class OrdersController < ApplicationController
     end
   end
 
-  def create
-  end
-
   def update
   end
 
-  def destroy
+  private
+
+  def order_params
+    params.permit(:id)
   end
 end
