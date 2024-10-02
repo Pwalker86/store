@@ -13,12 +13,18 @@ class OrdersController < ApplicationController
     @order = OrderDecorator.decorate(Order.find(order_params[:id]))
   end
 
+  def checkout
+    @order = OrderDecorator.decorate(Order.find(order_params[:order_id]))
+  end
+
   def submit
-    if OrderSubmitService.new(@open_order).submit
-      redirect_to pages_home_path, notice: "Order submitted successfully"
-    else
-      render @open_order, alert: "Order failed to submit"
-    end
+    debugger
+    @order = Order.find(order_params[:order_id])
+    # if OrderSubmitService.new(@open_order).submit
+    #   redirect_to pages_home_path, notice: "Order submitted successfully"
+    # else
+    #   render @open_order, alert: "Order failed to submit"
+    # end
   end
 
   def update
@@ -27,6 +33,10 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:id)
+    params.permit(:id, :order_id)
+  end
+
+  def order_submit_params
+    params.require(:order).permit(:order_id, :address1)
   end
 end
