@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   def create
-    @product = Product.find(params[:product_id])
+    @product = Product.find_by(id: params[:product_id])
     @order_item = @open_order.order_items.find_or_create_by(product: @product)
     @order_item.quantity += params[:quantity].to_i
 
