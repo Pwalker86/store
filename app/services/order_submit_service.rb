@@ -22,8 +22,6 @@ class OrderSubmitService
   def set_sales_prices
     @order.order_items.each do |item|
       item.price = item.product.price
-      item.save!
     end
   end
 end
-
