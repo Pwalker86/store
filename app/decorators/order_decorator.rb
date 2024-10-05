@@ -12,4 +12,8 @@ class OrderDecorator < Draper::Decorator
   def order_item_totals
     object.order_items.sum(:quantity)
   end
+
+  def is_ready_for_checkout
+    object.status == Order::ORDER_OPEN && object.order_items.any?
+  end
 end

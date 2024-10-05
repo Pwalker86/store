@@ -11,8 +11,8 @@
         </li>
       <% end %>
     </ul>
-    <div>Total: <%= @order.total_price %></div>
-    <% if @order.status == 'open' %>
+    <% if @order.is_ready_for_checkout %>
+      <div>Total: <%= @order.total_price %></div>
       <%= link_to 'Checkout', order_checkout_path(@order), class: "button-link" %>
     <% end %>
   </div>

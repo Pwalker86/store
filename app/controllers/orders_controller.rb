@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # @return [ActiveRecord::Relation<Order>]
   def index
     if user_signed_in?
-      @orders = current_user.orders.where.not(status: "open")
+      @orders = current_user.orders.where.not(status: Order::ORDER_OPEN)
     end
   end
 
@@ -18,13 +18,12 @@ class OrdersController < ApplicationController
   end
 
   def submit
-    debugger
-    @order = Order.find(order_params[:order_id])
-    # if OrderSubmitService.new(@open_order).submit
-    #   redirect_to pages_home_path, notice: "Order submitted successfully"
-    # else
-    #   render @open_order, alert: "Order failed to submit"
-    # end
+    @order = Order.find(order_submit_params[:order_id])
+    if OrderSubmitService.new(@open_order, order_address_params).submit
+      redirect_to pages_home_path, notice: "Order submitted successfully"
+    else
+      render @open_order, alert: "Order failed to submit"
+    end
   end
 
   def update
@@ -37,6 +36,10 @@ class OrdersController < ApplicationController
   end
 
   def order_submit_params
-    params.require(:order).permit(:order_id, :address1)
+    params.require(:order).permit(:order_id)
+  end
+
+  def order_address_params
+    params.require(:order).permit(:address1, :address2, :city, :state, :postal_code)
   end
 end
