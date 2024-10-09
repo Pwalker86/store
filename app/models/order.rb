@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :guest, optional: true
   has_many :order_items
   has_many :products, through: :order_items
 
