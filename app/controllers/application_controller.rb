@@ -1,12 +1,23 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :ensure_open_order, if: :user_signed_in?
+  before_action :set_active_user
+  before_action :ensure_open_order
   protect_from_forgery with: :exception, prepend: true
 
   protected
+
+  def set_active_user
+    if current_user.nil? && session[:guest_id]
+      @active_user = Guest.find_by(id: session[:guest_id])
+    elsif current_user.nil?
+      @active_user = Guest.create!
+      session[:guest_id] = @active_user.id
+    end
+  end
+
   # @returns decorated [Order]
   def ensure_open_order
-    @open_order = OrderDecorator.decorate(current_user.orders.find_or_create_by(status: "open"))
+    @open_order = OrderDecorator.decorate(@active_user.orders.find_or_create_by(status: "open"))
   end
 
   def configure_permitted_parameters

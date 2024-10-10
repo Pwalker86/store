@@ -4,6 +4,12 @@
     <%= form_with model: @order, url: order_submit_path(order_id: @order), method: :post do |form| %>
       <%= form.hidden_field :order_id, value: @order.id %>
       <div class="Checkout__ShippingInfo__container">
+        <% if @order.guest.present? %>
+          <div class="form-group">
+            <%= form.label :email, "Email" %>
+            <%= form.text_field :email, required: true  %>
+          </div>
+        <% end %>
         <div class="form-group">
           <%= form.label :address1, "Address 1" %>
           <%= form.text_field :address1, required: true  %>

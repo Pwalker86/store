@@ -1,10 +1,9 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
 
   # @return [ActiveRecord::Relation<Order>]
   def index
-    if user_signed_in?
-      @orders = current_user.orders.where.not(status: Order::ORDER_OPEN)
+    if @active_user
+      @orders = OrderDecorator.decorate_collection (@active_user.orders.includes(:user).where.not(status: Order::ORDER_OPEN))
     end
   end
 
@@ -31,6 +30,10 @@ class OrdersController < ApplicationController
 
   private
 
+  def ensure_active_user
+    redirect_to root_path, alert: 'Cannot find user' unless @active_user
+  end
+
   def order_params
     params.permit(:id, :order_id)
   end
@@ -40,6 +43,6 @@ class OrdersController < ApplicationController
   end
 
   def order_address_params
-    params.require(:order).permit(:address1, :address2, :city, :state, :postal_code)
+    params.require(:order).permit(:address1, :address2, :city, :state, :postal_code, :email)
   end
 end

@@ -8,7 +8,7 @@
   <% @orders.each do |order| %>
     <tr>
       <td><%= order.id %></td>
-      <td><%= order.user.email %></td>
+      <td><%= order.user_entity.email %></td>
       <td><%= order.status %></td>
       <td><%= link_to 'View', order %></td>
     </tr>

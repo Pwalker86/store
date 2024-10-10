@@ -5,7 +5,7 @@ module ApplicationHelper
     elsif user_signed_in?
       current_user.username
     else
-      "Not logged in"
+      "Guest - Not logged in"
     end
   end
 end

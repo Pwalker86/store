@@ -1,6 +1,16 @@
 class OrderDecorator < Draper::Decorator
   delegate_all
 
+  # gives a single point to determine the user entity of an order.
+  def user_entity
+    if object.guest.nil?
+      object.user
+    elsif object.user.nil?
+      object.guest
+    end
+  end
+
+  # Sorts the items here. Otherwise, the order changes every time an item is added.
   def sorted_order_items
     object.order_items.includes(:product).order("products.name")
   end

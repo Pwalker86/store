@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="Navbar__Links col-right">
-    <% if user_signed_in? %>
+    <% if @active_user %>
       <%= link_to "Current Order: #{ @open_order.order_item_totals}", @open_order, title: 'View Order' %>
       <%= link_to 'Home', pages_home_path %>
       <%= link_to 'Log out', destroy_user_session_path, data: { turbo_method: :delete } %>

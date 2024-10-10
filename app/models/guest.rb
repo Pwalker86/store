@@ -1,4 +1,4 @@
 
 class Guest < ApplicationRecord
-  has_one :order
+  has_many :orders
 end
