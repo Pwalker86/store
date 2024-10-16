@@ -14,7 +14,7 @@
     <%= product.description %>
   </p>
 
-  <% if @active_user %>
+  <% if @active_user && !current_admin %>
     <%= button_to 'Add to Order', order_items_path(order_id: @open_order.id, product_id: product.id, quantity: 1) %>
   <% end %>
   <% if current_page?(products_path) %>

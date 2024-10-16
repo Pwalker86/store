@@ -1,0 +1,14 @@
+<div>
+  <h3>Order: <%= @order.id %></h3>
+  <div>
+    <h4>Order Items</h4>
+    <ul>
+      <% @order.sorted_order_items.each do |item| %>
+        <li>
+          <%= item.product.name %>
+          <%= number_to_currency(item.price) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

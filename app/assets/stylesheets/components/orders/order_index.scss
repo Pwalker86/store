@@ -1,0 +1,43 @@
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1em;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  &__header {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  &__header-cell {
+    padding: 12px 15px;
+  }
+
+  &__row {
+    border-bottom: 1px solid #dddddd;
+
+    &:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    &:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+  }
+
+  &__cell {
+    padding: 12px 15px;
+  }
+
+  &__link {
+    color: #009879;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

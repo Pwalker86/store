@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   # @return [ActiveRecord::Relation<Order>]
   def index
     if @active_user
-      @orders = OrderDecorator.decorate_collection (@active_user.orders.includes(:user).where.not(status: Order::ORDER_OPEN))
+      @orders = OrderDecorator.decorate_collection (@active_user.orders.includes([:user]).where.not(status: Order::ORDER_OPEN))
     end
   end
 
@@ -18,11 +18,15 @@ class OrdersController < ApplicationController
 
   def submit
     @order = Order.find(order_submit_params[:order_id])
-    if OrderSubmitService.new(@open_order, order_address_params).submit
-      redirect_to pages_home_path, notice: "Order submitted successfully"
+    if OrderSubmitService.new(@order, order_address_params).submit
+      redirect_to order_confirmation_path(@order), notice: "Order submitted successfully"
     else
       render @open_order, alert: "Order failed to submit"
     end
+  end
+
+  def confirmation
+    @order = OrderDecorator.decorate(Order.find(order_params[:order_id]))
   end
 
   def update

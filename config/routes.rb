@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show, :update] do
     get "checkout", as: "checkout"
     post "submit", as: "submit"
+    get "confirmation", as: "confirmation"
     resources :order_items, only: [:create, :update], as: "items"
   end
 
