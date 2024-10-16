@@ -1,21 +1,21 @@
-<div class="order-summary">
-  <h3 class="order-summary__title">Order: <%= @order.id %></h3>
-  <div class="order-summary__items">
-    <h4 class="order-summary__items-title">Order Items</h4>
-    <ul class="order-summary__items-list">
+<div class="OrderSummary">
+  <h3 class="OrderSummary__title">Order: <%= @order.id %></h3>
+  <div class="OrderSummary__items">
+    <h4 class="OrderSummary__items-title">Order Items</h4>
+    <ul class="OrderSummary__items-list">
       <% @order.sorted_order_items.each do |item| %>
-        <li class="order-summary__item">
-          <span class="order-summary__item-name"><%= item.product.name %></span>
-          <span class="order-summary__item-price"><%= number_to_currency(item.price) %></span>
-          <div class="order-summary__item-qty">
+        <li class="OrderSummary__item">
+          <span class="OrderSummary__item-name"><%= item.product.name %></span>
+          <span class="OrderSummary__item-price"><%= number_to_currency(item.price) %></span>
+          <div class="OrderSummary__item-qty">
             <%= render 'qty_incrementor', item: item, order: @order %>
           </div>
         </li>
       <% end %>
     </ul>
     <% if @order.is_ready_for_checkout %>
-      <div class="order-summary__total">Total: <%= @order.total_price %></div>
-      <%= link_to 'Checkout', order_checkout_path(@order), class: "order-summary__checkout-button button-link" %>
+      <div class="OrderSummary__total">Total: <%= @order.total_price %></div>
+      <%= link_to 'Checkout', order_checkout_path(@order), class: "OrderSummary__checkout-button button-link" %>
     <% end %>
   </div>
 </div>
