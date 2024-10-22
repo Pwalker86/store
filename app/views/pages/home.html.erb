@@ -2,7 +2,7 @@
 <%= render "user_list", users: @users %>
 <h2>Admins: </h2>
 <%= render "user_list", users: @admins %>
-<% if admin_signed_in? || user_signed_in? %>
+<% if admin_signed_in? || @active_user %>
   <p>
     <%= link_to 'Products', products_path %>
   </p>
