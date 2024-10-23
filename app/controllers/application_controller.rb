@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if current_user
       @active_user = current_user
     elsif current_user.nil? && session[:guest_id]
-      @active_user = Guest.find_by(id: session[:guest_id])
+      @active_user = Guest.find_or_create_by(id: session[:guest_id])
     elsif current_user.nil?
       @active_user = Guest.create!
       session[:guest_id] = @active_user.id
