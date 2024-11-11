@@ -7,9 +7,9 @@ Starting off with a basic online store template.
 Features targeted right now:
 
 1. User login
-- browse products, add to cart, checkout flow
+   - browse products, add to cart, checkout flow
 2. Admin login
--  manage products, view orders
+   -  manage products, view orders
 3. Guest login
    - add item to cart as guest
    - checkout as guest
