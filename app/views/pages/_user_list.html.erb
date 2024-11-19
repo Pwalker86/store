@@ -1,10 +1,25 @@
-<div>
-  <ul>
-    <% users.each do |user| %>
-      <li>
-        <div>Username: <%= user.username %></div>
-        <div>Email: <%= user.email %></div>
-      </li>
-    <% end %>
-  </ul>
+<div class="hidden" data-home-target="userList">
+  <h2>Users: </h2>
+  <div>
+    <ul>
+      <% @users.each do |user| %>
+        <li>
+          <div>Username: <%= user.username %></div>
+          <div>Email: <%= user.email %></div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <h2>Admins: </h2>
+  <div>
+    <ul>
+      <% @admins.each do |admin| %>
+        <li>
+          <div>Username: <%= admin.username %></div>
+          <div>Email: <%= admin.email %></div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </div>
