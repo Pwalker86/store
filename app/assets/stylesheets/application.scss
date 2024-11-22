@@ -1,6 +1,6 @@
-@import "components/index";
-@import "layouts/index";
-@import "utilities/index.scss";
+@use "components/index";
+@use "layouts/index" as index2;
+@use "utilities/index.scss" as index3;
 
 body {
   scrollbar-gutter: stable;
