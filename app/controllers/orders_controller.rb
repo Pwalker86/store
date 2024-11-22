@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   # @return [ActiveRecord::Relation<Order>]
   def index
     if @active_user
-      @orders = OrderDecorator.decorate_collection(@active_user.orders.includes([:user]).where.not(status: Order::ORDER_OPEN))
+      @orders = get_user_orders
     end
   end
 
@@ -35,6 +35,13 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def get_user_orders
+    OrderDecorator.decorate_collection(@active_user.orders.where.not(status: Order::ORDER_OPEN))
+  end
+
+  def get_admin_orders
+  end
 
   def ensure_active_user
     redirect_to root_path, alert: "Cannot find user" unless @active_user
