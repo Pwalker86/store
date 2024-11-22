@@ -8,34 +8,32 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-puts '******* Creating Users *****'
+puts "******* Creating Users *****"
 3.times do |i|
-  u = User.new(email: "user#{i}@email.com", password: 'test123', username: "user#{i}")
+  u = User.new(email: "user#{i}@email.com", password: "test123", username: "user#{i}")
   if u.save!
     puts "#{u.username} created"
   else
-    puts 'User not created'
+    puts "User not created"
   end
 end
 
-
-puts '******* Creating Admins *****'
+puts "******* Creating Admins *****"
 3.times do |i|
-  a = Admin.new(email: "admin#{i}@email.com", password: 'test123', username: "admin#{i}")
+  a = Admin.new(email: "admin#{i}@email.com", password: "test123", username: "admin#{i}")
   if a.save!
     puts "#{a.username} created"
   else
-    puts 'User not created'
+    puts "User not created"
   end
 end
 
-puts '******* Creating Products *****'
+puts "******* Creating Products *****"
 10.times do |i|
   p = Product.new(name: "Product #{i}", price: 100, description: "This is a product description")
   if p.save!
     puts "#{p.name} created"
   else
-    puts 'Product not created'
+    puts "Product not created"
   end
 end
-

@@ -1,9 +1,8 @@
 class OrdersController < ApplicationController
-
   # @return [ActiveRecord::Relation<Order>]
   def index
     if @active_user
-      @orders = OrderDecorator.decorate_collection (@active_user.orders.includes([:user]).where.not(status: Order::ORDER_OPEN))
+      @orders = OrderDecorator.decorate_collection(@active_user.orders.includes([:user]).where.not(status: Order::ORDER_OPEN))
     end
   end
 
@@ -19,7 +18,7 @@ class OrdersController < ApplicationController
   def submit
     @order = Order.find(order_submit_params[:order_id])
     if OrderSubmitService.new(@order, order_address_params).submit
-      # Clear guest session. If the user needs to view their order, 
+      # Clear guest session. If the user needs to view their order,
       # they'll see it on the confirmation page or from the order id we provide them in an email
       session[:guest_id] = nil
       redirect_to order_confirmation_path(@order), notice: "Order submitted successfully"
@@ -38,7 +37,7 @@ class OrdersController < ApplicationController
   private
 
   def ensure_active_user
-    redirect_to root_path, alert: 'Cannot find user' unless @active_user
+    redirect_to root_path, alert: "Cannot find user" unless @active_user
   end
 
   def order_params
