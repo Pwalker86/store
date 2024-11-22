@@ -1,6 +1,5 @@
-# added in 8.0 update
-#!/usr/bin/env ruby
-# exec "./bin/rails", "server", *ARGV
+
+#!/usr/bin/env sh
 
 #Delete the application.css file to ensure it gets recompiled
 rm -f app/assets/builds/application.css
