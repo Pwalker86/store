@@ -1,9 +1,11 @@
 <h1>Products</h1>
+<%= link_to "New product", new_product_path, data: { turbo_frame: dom_id(Product.new) } %>
 
-<div id="products" class="grid-container">
-  <% @products.each do |product| %>
-    <%= render product %>
-  <% end %>
-</div>
 
-<%= link_to "New product", new_product_path %>
+<%= turbo_frame_tag Product.new %>
+
+<%= turbo_frame_tag "products", class: "grid-container" do %>
+    <% @products.each do |product| %>
+      <%= render product %>
+    <% end %>
+<% end %>
