@@ -1,4 +1,6 @@
-<%= render @product %>
+<% turbo_frame_tag "show_product_#{@product.id}" do %>
+  <%= render @product %>
+<% end %>
 
 <div>
   <%= link_to "Back to products", products_path %>

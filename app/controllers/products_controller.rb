@@ -9,6 +9,10 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
+    respond_to do |format|
+      format.html { render :show }
+      format.turbo_stream
+    end
   end
 
   # GET /products/new

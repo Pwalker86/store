@@ -1,6 +1,8 @@
 <h1>Editing product</h1>
 
-<%= render "form", product: @product %>
+<%= turbo_frame_tag "edit_product_#{@product.id}" do %>
+  <%= render "form", product: @product %>
+<% end %>
 
 <br>
 

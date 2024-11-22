@@ -20,4 +20,7 @@
     <p>
       <%= link_to "View", product, class: 'button-link' %>
     </p>
+    <%= turbo_frame_tag "edit_product_#{product.id}" do %>
+      <%= link_to "Edit", edit_product_path(product), class: 'button-link' %>
+    <% end %>
 </div>
