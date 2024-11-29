@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Order, type: :model do
   it "order.open? returns true if order status is open" do
@@ -6,28 +6,28 @@ RSpec.describe Order, type: :model do
     expect(open_order.open?).to eq(true)
   end
 
-  context 'shipping address' do
+  context "shipping address" do
     order = Order.create(shipping_address: {
-      address1: '123 Main St',
-      address2: 'Apt 2',
-      city: 'Springfield',
-      state: 'IL',
-      postal_code: '62701'
+      address1: "123 Main St",
+      address2: "Apt 2",
+      city: "Springfield",
+      state: "IL",
+      postal_code: "62701"
     })
-    it 'address1 returns the correct value' do
-      expect(order.address1).to eq('123 Main St')
+    it "address1 returns the correct value" do
+      expect(order.address1).to eq("123 Main St")
     end
-    it 'address2 returns the correct value' do
-      expect(order.address2).to eq('Apt 2')
+    it "address2 returns the correct value" do
+      expect(order.address2).to eq("Apt 2")
     end
-    it 'city returns the correct value' do
-      expect(order.city).to eq('Springfield')
+    it "city returns the correct value" do
+      expect(order.city).to eq("Springfield")
     end
-    it 'state returns the correct value' do
-      expect(order.state).to eq('IL')
+    it "state returns the correct value" do
+      expect(order.state).to eq("IL")
     end
-    it 'postal_code returns the correct value' do
-      expect(order.postal_code).to eq('62701')
+    it "postal_code returns the correct value" do
+      expect(order.postal_code).to eq("62701")
     end
   end
 end
