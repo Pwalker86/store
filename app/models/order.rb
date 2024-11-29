@@ -1,12 +1,12 @@
 class Order < ApplicationRecord
-  #TODO: add a different column for a unique, non-numerical, non-consecutive order id
+  # TODO: add a different column for a unique, non-numerical, non-consecutive order id
   belongs_to :user, optional: true
   belongs_to :guest, optional: true
   has_many :order_items
   has_many :products, through: :order_items
 
-  ORDER_OPEN = 'open'
-  ORDER_PENDING = 'pending'
+  ORDER_OPEN = "open"
+  ORDER_PENDING = "pending"
 
   def open?
     status == ORDER_OPEN

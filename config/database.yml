@@ -14,18 +14,18 @@
 #
 default: &default
   adapter: postgresql
-  username: <%= Rails.application.credentials.dig(:development, :database, :username) %>
-  password: <%= Rails.application.credentials.dig(:development, :database, :password) %>
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
   encoding: unicode
+  pool: 5
+  host: localhost
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV['POSTGRES_HOST'] %>
 
 
 development:
   <<: *default
-  database: <%= Rails.application.credentials.dig(:development, :database, :db_name) %>
+  database: <%= Rails.application.credentials.dig(:database, :db_name) %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -59,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: <%= Rails.application.credentials.dig(:test, :database, :db_name) %>
+  database: <%= Rails.application.credentials.dig(:database, :db_name) %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

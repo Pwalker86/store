@@ -1,0 +1,12 @@
+
+#!/usr/bin/env sh
+
+#Delete the application.css file to ensure it gets recompiled
+rm -f app/assets/builds/application.css
+
+if ! gem list foreman -i --silent; then
+  echo "Installing foreman..."
+  gem install foreman
+fi
+
+exec foreman start -f Procfile.dev "$@"
