@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # @returns decorated [Order]
+  # Ensures that an open order exists for the active user.
+  # @return [void]
   def ensure_open_order
     return if current_admin
     @open_order = OrderDecorator.decorate(@active_user.orders.find_or_create_by(status: "open"))
