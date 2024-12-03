@@ -43,6 +43,7 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  gem "rubocop", require: false
   gem "rubocop-rails-omakase", require: false
   gem "factory_bot_rails"
   gem "faker"
@@ -52,9 +53,9 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "bullet", "~> 8.0"
-  gem 'solargraph'
-  gem 'solargraph-rails'
-  gem 'erb-formatter'
+  gem "solargraph"
+  gem "solargraph-rails"
+  gem "erb-formatter"
 end
 
 group :test do
