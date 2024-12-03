@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :ensure_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_admin!, only: [ :new, :create, :edit, :update, :destroy ]
   before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products or /products.json

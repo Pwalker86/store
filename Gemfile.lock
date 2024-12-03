@@ -494,6 +494,7 @@ DEPENDENCIES
   rails (~> 8.0.0)
   rails-controller-testing
   rspec-rails
+  rubocop
   rubocop-rails-omakase
   sassc (~> 2.4)
   selenium-webdriver
