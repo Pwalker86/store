@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_173433) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_03_195400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,7 +51,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_173433) do
     t.datetime "updated_at", null: false
     t.jsonb "shipping_address", default: {}
     t.bigint "guest_id"
+    t.bigint "store_id", default: 1, null: false
     t.index ["guest_id"], name: "index_orders_on_guest_id"
+    t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -62,6 +64,20 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_173433) do
     t.boolean "out_of_stock", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "store_id", default: 1, null: false
+    t.index ["store_id"], name: "index_products_on_store_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "location"
+    t.string "phone_number"
+    t.string "email"
+    t.string "mission_statement"
+    t.bigint "admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_stores_on_admin_id"
   end
 
   create_table "super_users", force: :cascade do |t|
@@ -92,5 +108,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_173433) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "guests"
+  add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
+  add_foreign_key "products", "stores"
+  add_foreign_key "stores", "admins"
 end

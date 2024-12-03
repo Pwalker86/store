@@ -4,20 +4,20 @@
 </div>
 <% if admin_signed_in? || @active_user %>
   <p>
-    <%= link_to 'Products', products_path %>
+    <%= link_to "View Products", store_products_path(@store) %>
   </p>
 <% end %>
 <% if admin_signed_in? %>
   <hr>
-  <%= link_to 'Edit Admin', edit_admin_registration_path %>
-  <%= button_to 'Sign Out', destroy_admin_session_path, method: :delete %>
+  <%= link_to "Edit Admin", edit_admin_registration_path %>
+  <%= button_to "Sign Out", destroy_admin_session_path, method: :delete %>
 <% elsif user_signed_in? %>
-  <%= link_to 'Edit User Profile', edit_user_registration_path %>
-  <%= button_to 'Sign Out', destroy_user_session_path, method: :delete %>
+  <%= link_to "Edit User Profile", edit_user_registration_path %>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
 <% else %>
-  <%= link_to 'User Sign In', new_user_session_path %>
-  <%= link_to 'User Sign Up', new_user_registration_path %>
+  <%= link_to "User Sign In", new_user_session_path %>
+  <%= link_to "User Sign Up", new_user_registration_path %>
   <hr>
-  <%= link_to 'Admin Sign In', new_admin_session_path %>
-  <%= link_to 'Admin Sign Up', new_admin_registration_path %>
+  <%= link_to "Admin Sign In", new_admin_session_path %>
+  <%= link_to "Admin Sign Up", new_admin_registration_path %>
 <% end %>

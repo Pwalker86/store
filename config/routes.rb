@@ -7,7 +7,10 @@ Rails.application.routes.draw do
     resources :order_items, only: [ :create, :update ], as: "items"
   end
 
-  resources :products
+  resources :stores do
+    resources :products
+  end
+
 
   devise_for :users
   devise_for :admins

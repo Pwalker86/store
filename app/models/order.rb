@@ -2,6 +2,7 @@ class Order < ApplicationRecord
   # TODO: add a different column for a unique, non-numerical, non-consecutive order id
   belongs_to :user, optional: true
   belongs_to :guest, optional: true
+  belongs_to :store
   has_many :order_items
   has_many :products, through: :order_items
 

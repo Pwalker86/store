@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :ensure_admin!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :ensure_admin!, only: [ :new, :create, :edit, :update, :destroy ]
   before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products or /products.json
   def index
-    @products = ProductDecorator.decorate_collection(Product.all)
+    @store = Store.find(params[:store_id])
+    @products = ProductDecorator.decorate_collection(@store.products)
   end
 
   # GET /products/1 or /products/1.json
