@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_active_user
+    session[:guest_id] = nil and return if current_admin
     if current_user
       @active_user = current_user
     elsif current_user.nil? && session[:guest_id]
@@ -24,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:username])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :username ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :username ])
   end
 end

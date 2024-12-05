@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     resources :products
   end
 
-
   devise_for :users
   devise_for :admins
 
