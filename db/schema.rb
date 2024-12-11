@@ -28,12 +28,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.bigint "products_id", null: false
+    t.bigint "product_id", null: false
     t.bigint "cart_id", null: false
+    t.integer "quantity", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
-    t.index ["products_id"], name: "index_cart_items_on_products_id"
+    t.index ["product_id"], name: "index_cart_items_on_product_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -122,7 +123,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
   end
 
   add_foreign_key "cart_items", "carts"
-  add_foreign_key "cart_items", "products", column: "products_id"
+  add_foreign_key "cart_items", "products"
   add_foreign_key "carts", "guests"
   add_foreign_key "carts", "users"
   add_foreign_key "order_items", "orders"

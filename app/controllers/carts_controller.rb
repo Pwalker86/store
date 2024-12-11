@@ -19,11 +19,11 @@ class CartsController < ApplicationController
     #
     if cart_item.quantity <= 0
       cart_item.destroy
-      redirect_to @open_order, notice: "Product was successfully removed from your order."
+      redirect_to user_cart_path, notice: "Product was successfully removed from your order."
     elsif cart_item.save
-      redirect_to @open_order, notice: "Quantity was successfully updated."
+      redirect_to user_cart_path, notice: "Quantity was successfully updated."
     else
-      redirect_to @open_order, alert: "There was an error updating the product quantity."
+      redirect_to user_cart_path, alert: "There was an error updating the product quantity."
     end
   end
 
