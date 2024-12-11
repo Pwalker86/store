@@ -4,4 +4,8 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :validatable
   has_one :store
+
+  def store_orders
+    Order.joins(order_items: { product: :store }).where(stores: { admin_id: id }).distinct
+  end
 end

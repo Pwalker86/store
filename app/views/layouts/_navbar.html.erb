@@ -12,11 +12,11 @@
   </div>
   <div class="Navbar__Links col-right">
     <%= link_to "Home", pages_home_path %>
-    <% if @active_user  && !current_admin %>
-      <%= link_to "Current Order: #{@open_order.order_item_totals}",
-      @open_order,
+    <%# if @active_user  && !current_admin %>
+      <%#= link_to "Current Order: #{@open_order.order_item_totals}",
+        @cart,
       title: "View Order" %>
-    <% end %>
+    <%# end %>
     <% if @active_user && @active_user.is_a?(User) %>
       <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
     <% end %>

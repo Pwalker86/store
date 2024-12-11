@@ -4,6 +4,10 @@ class OrderItem < ApplicationRecord
   # Ensure price_at_submission is set when the order is submitted
   before_save :set_price_at_submission, if: :order_pending?
 
+  def store
+    Store.where(products: [ self.product.store ]).first
+  end
+
   private
 
   def set_price_at_submission

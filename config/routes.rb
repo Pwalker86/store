@@ -7,12 +7,17 @@ Rails.application.routes.draw do
     resources :order_items, only: [ :create, :update ], as: "items"
   end
 
+
   resources :stores do
     resources :products
   end
 
   devise_for :users
   devise_for :admins
+
+  resources :user  do
+    resource :cart, only: [ :show, :edit, :update, :destroy ]
+  end
 
   root to: "pages#home"
   get "pages/home"

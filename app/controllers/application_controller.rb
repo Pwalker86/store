@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_active_user
-  before_action :ensure_open_order
+  before_action :ensure_cart
   protect_from_forgery with: :exception, prepend: true
 
   protected
@@ -19,9 +19,9 @@ class ApplicationController < ActionController::Base
   end
 
   # @returns decorated [Order]
-  def ensure_open_order
+  def ensure_cart
     return if current_admin
-    @open_order = OrderDecorator.decorate(@active_user.orders.find_or_create_by(status: "open"))
+    @cart = @active_user.cart || @active_user.create_cart!
   end
 
   def configure_permitted_parameters

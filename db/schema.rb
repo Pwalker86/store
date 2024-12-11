@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_03_195400) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,6 +25,24 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_195400) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.bigint "products_id", null: false
+    t.bigint "cart_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_items_on_cart_id"
+    t.index ["products_id"], name: "index_cart_items_on_products_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "guest_id"
+    t.index ["guest_id"], name: "index_carts_on_guest_id"
+    t.index ["user_id"], name: "index_carts_on_user_id", unique: true
   end
 
   create_table "guests", force: :cascade do |t|
@@ -51,9 +69,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_195400) do
     t.datetime "updated_at", null: false
     t.jsonb "shipping_address", default: {}
     t.bigint "guest_id"
-    t.bigint "store_id", default: 1, null: false
     t.index ["guest_id"], name: "index_orders_on_guest_id"
-    t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -64,7 +80,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_195400) do
     t.boolean "out_of_stock", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "store_id", default: 1, null: false
+    t.bigint "store_id", null: false
     t.index ["store_id"], name: "index_products_on_store_id"
   end
 
@@ -105,10 +121,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_03_195400) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "cart_items", "carts"
+  add_foreign_key "cart_items", "products", column: "products_id"
+  add_foreign_key "carts", "guests"
+  add_foreign_key "carts", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "guests"
-  add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
   add_foreign_key "stores", "admins"

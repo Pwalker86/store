@@ -21,19 +21,18 @@ end
 puts "******* Creating Admins *****"
 3.times do |i|
   a = Admin.new(email: "admin#{i}@email.com", password: "test123", username: "admin#{i}")
-  if a.save!
-    puts "#{a.username} created"
-  else
-    puts "User not created"
-  end
-end
-
-puts "******* Creating Products *****"
-10.times do |i|
-  p = Product.new(name: "Product #{i}", price: 100, description: "This is a product description")
-  if p.save!
-    puts "#{p.name} created"
-  else
-    puts "Product not created"
+  begin
+    a.save!
+    puts "******** Admin: #{a.username} created ********* "
+    s = Store.new(name: "Admin #{a.username} store", location: Faker::Address.city, phone_number: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: a.id)
+    s.save!
+    puts "******** Store: #{s.name} created *********"
+    10.times do |i|
+      p = Product.new(name: Faker::Movie.title, price: 100, description: Faker::Lorem.sentence(word_count: 10), store_id: s.id)
+      p.save!
+      puts "*********** Product: #{ p.name} created **********"
+    end
+  rescue StandardError => exception
+    puts "User not created: #{exception}"
   end
 end
