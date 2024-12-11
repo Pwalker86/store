@@ -1,0 +1,18 @@
+<div
+  class="OrderShow__quantity-control"
+  data-product-id="<%= item.product.id %>"
+>
+  <%= form_with url: user_cart_item_path(id: item), method: :patch, html: { class: 'minus-form' } do |form| %>
+    <%= form.hidden_field :quantity, value: -1 %>
+    <%= form.hidden_field :product_id, value: item.product.id %>
+    <%= form.hidden_field :user_entity, value: @active_user.class.name %>
+    <%= form.submit "-", class: "OrderShow__quantity-btn minus" %>
+  <% end %>
+  <span class="OrderShow__quantity-display"><%= item.quantity %></span>
+  <%= form_with url: user_cart_item_path(id: item), method: :patch, html: { class: 'minus-form' } do |form| %>
+    <%= form.hidden_field :quantity, value: 1 %>
+    <%= form.hidden_field :product_id, value: item.product.id %>
+    <%= form.hidden_field :user_entity, value: @active_user.class.name %>
+    <%= form.submit "+", class: "OrderShow__quantity-btn minus" %>
+  <% end %>
+</div>

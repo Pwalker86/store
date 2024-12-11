@@ -31,6 +31,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
     t.bigint "product_id", null: false
     t.bigint "cart_id", null: false
     t.integer "quantity", default: 0, null: false
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
@@ -70,6 +71,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
     t.datetime "updated_at", null: false
     t.jsonb "shipping_address", default: {}
     t.bigint "guest_id"
+    t.integer "store_id"
     t.index ["guest_id"], name: "index_orders_on_guest_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -129,6 +131,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "guests"
+  add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
   add_foreign_key "stores", "admins"

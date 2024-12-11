@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     get "checkout", as: "checkout"
     post "submit", as: "submit"
     get "confirmation", as: "confirmation"
-    resources :order_items, only: [ :create, :update ], as: "items"
+    # resources :order_items, only: [ :create, :update ], as: "items"
   end
 
 
@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   devise_for :admins
 
   resources :user  do
-    resource :cart, only: [ :show, :edit, :update, :destroy ]
+    resource :cart, only: [ :show, :edit, :update, :destroy ] do
+      resources :cart_items, only: [ :create, :update ], as: "items"
+    end
   end
 
   root to: "pages#home"
