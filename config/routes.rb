@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :user  do
     resource :cart, only: [ :show, :edit, :update, :destroy ] do
-      resources :cart_items, only: [ :create, :update ], as: "items"
+      resources :cart_items, only: :update, as: "items"
     end
   end
 

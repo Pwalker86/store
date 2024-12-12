@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :ensure_cart
   protect_from_forgery with: :exception, prepend: true
 
+
   protected
 
   def set_active_user
@@ -18,10 +19,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # @returns decorated [Order]
+  # @return decorated [Cart]
   def ensure_cart
     return if current_admin
-    @cart = @active_user.cart || @active_user.create_cart!
+    set_active_user if !@active_user
+    cart = @active_user.cart || @active_user.create_cart!
+    @cart = CartDecorator.decorate(cart)
   end
 
   def configure_permitted_parameters

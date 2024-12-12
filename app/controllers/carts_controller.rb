@@ -1,11 +1,4 @@
 class CartsController < ApplicationController
-  def show
-    @show_cart = CartDecorator.decorate(@active_user.cart)
-  end
-
-  def edit
-  end
-
   def update
     user_entity_class = params[:user_entity].constantize
     cart = user_entity_class.find(params[:user_id]).cart
