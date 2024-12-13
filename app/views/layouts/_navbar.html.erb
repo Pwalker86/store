@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="Navbar__Links col-right">
-    <%= link_to "Home", pages_home_path %>
+    <%= link_to "Home", root_path %>
     <% if @active_user  && !current_admin %>
       <%= link_to "My Cart: #{@cart.cart_item_totals}",
       user_cart_path(@active_user),

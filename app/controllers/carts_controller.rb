@@ -1,4 +1,8 @@
 class CartsController < ApplicationController
+  def checkout
+    @order = @active_user.orders.new
+  end
+
   def update
     user_entity_class = params[:user_entity].constantize
     cart = user_entity_class.find(params[:user_id]).cart

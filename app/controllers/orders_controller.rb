@@ -8,11 +8,24 @@ class OrdersController < ApplicationController
 
   # @return decorated [Order]
   def show
-    @order = OrderDecorator.decorate(Order.find(order_params[:id]))
+    @order = OrderDecorator.decorate(Order.find(params[:id]))
   end
 
-  def checkout
-    @order = OrderDecorator.decorate(Order.find(order_params[:order_id]))
+  def create
+    user = order_params[:user_entity].constantize.find(order_params[:user_entity_id])
+    cart = user.cart
+    begin
+      ConvertCartToOrderService.new(cart, order_address_params, user).process
+      if @active_user.is_a? Guest
+        redirect_to root_path
+      elsif @active_user.is_a? User
+        redirect_to orders_path
+      end
+    rescue StandardError => e
+      puts "*****************Error*****************"
+      puts e
+      redirect_to root_path, alert("something went wrong")
+    end
   end
 
   def submit
@@ -37,7 +50,7 @@ class OrdersController < ApplicationController
   private
 
   def get_user_orders
-    OrderDecorator.decorate_collection(@active_user.orders.where.not(status: Order::ORDER_OPEN))
+    OrderDecorator.decorate_collection(@active_user.orders)
   end
 
   def get_admin_orders
@@ -48,7 +61,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.permit(:id, :order_id)
+    params.require(:order).permit(:user_entity, :user_entity_id, :address1, :address2, :city, :state, :postal_code, :email)
   end
 
   def order_submit_params

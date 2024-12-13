@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   devise_for :super_users
-  resources :orders, only: [ :index, :show, :update ] do
-    get "checkout", as: "checkout"
+
+  resources :orders, only: [ :index, :show, :create, :update ] do
     post "submit", as: "submit"
     get "confirmation", as: "confirmation"
     # resources :order_items, only: [ :create, :update ], as: "items"
   end
-
 
   resources :stores do
     resources :products
@@ -17,12 +16,12 @@ Rails.application.routes.draw do
 
   resources :user  do
     resource :cart, only: [ :show, :edit, :update, :destroy ] do
+      get "checkout"
       resources :cart_items, only: :update, as: "items"
     end
   end
 
   root to: "pages#home"
-  get "pages/home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -7,7 +7,7 @@ class CartDecorator < Draper::Decorator
   end
 
   def total_price
-    object.cart_items.includes(:product).sum { |item| item.product.price * item.quantity }
+    object.cart_items.includes(:product).sum { |item| item.price * item.quantity }
   end
 
   def cart_item_totals

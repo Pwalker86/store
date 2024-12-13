@@ -1,5 +1,6 @@
 class CartItemsController < ApplicationController
   def update
+    # TODO: Need to account for product changing price and how to handle that if a product is in a cart
     user_entity_class = cart_item_params[:user_entity].constantize
     cart = user_entity_class.find(cart_item_params[:user_id]).cart
     product = Product.find(cart_item_params[:product_id])
