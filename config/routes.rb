@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :super_users
-
   resources :orders, only: [ :index, :show, :create, :update ] do
     post "submit", as: "submit"
     get "confirmation", as: "confirmation"
@@ -12,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  devise_for :admins
+  devise_for :store_admins
 
   resources :user  do
     resource :cart, only: [ :show, :edit, :update, :destroy ] do

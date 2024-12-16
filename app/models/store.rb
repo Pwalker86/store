@@ -1,5 +1,5 @@
 class Store < ApplicationRecord
-  belongs_to :admin
+  belongs_to :store_admin
   has_many :products
   has_many :orders
 

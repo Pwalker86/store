@@ -10,9 +10,9 @@
 
 puts "******* Creating Users *****"
 3.times do |i|
-  u = User.new(email: "user#{i}@email.com", password: "test123", username: "user#{i}")
+  u = User.new(email: "user#{i}@email.com", password: "test123")
   if u.save!
-    puts "#{u.username} created"
+    puts "#{u.email} created"
   else
     puts "User not created"
   end
@@ -20,11 +20,11 @@ end
 
 puts "******* Creating Admins *****"
 3.times do |i|
-  a = Admin.new(email: "admin#{i}@email.com", password: "test123", username: "admin#{i}")
+  a = StoreAdmin.new(email: "admin#{i}@email.com", password: "test123")
   begin
     a.save!
-    puts "******** Admin: #{a.username} created ********* "
-    s = Store.new(name: "Admin #{a.username} store", location: Faker::Address.city, phone_number: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, admin_id: a.id)
+    puts "******** Admin: #{a.email} created ********* "
+    s = Store.new(name: "#{a.email} store", location: Faker::Address.city, phone_number: Faker::PhoneNumber.phone_number, email: Faker::Internet.email, store_admin_id: a.id)
     s.save!
     puts "******** Store: #{s.name} created *********"
     10.times do |i|

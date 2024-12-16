@@ -6,7 +6,7 @@ class CreateStores < ActiveRecord::Migration[8.0]
       t.string :phone_number
       t.string :email
       t.string :mission_statement
-      t.references(:admin, foreign_key: true)
+      t.references(:store_admin, foreign_key: true)
 
       t.timestamps
     end
