@@ -58,9 +58,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
     t.datetime "updated_at", null: false
     t.jsonb "shipping_address", default: {}
     t.bigint "guest_id"
-    t.bigint "store_id", null: false
     t.index ["guest_id"], name: "index_orders_on_guest_id"
-    t.index ["store_id"], name: "index_orders_on_store_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -130,7 +128,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "guests"
-  add_foreign_key "orders", "stores"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
   add_foreign_key "stores", "store_admins"
