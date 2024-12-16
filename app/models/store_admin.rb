@@ -6,6 +6,6 @@ class StoreAdmin < ApplicationRecord
   has_one :store
 
   def store_orders
-    Order.joins(order_items: { product: :store }).where(stores: { admin_id: id }).distinct
+    Order.joins(order_items: { product: :store }).where(stores: { store_admin_id: id }).distinct
   end
 end

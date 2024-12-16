@@ -1,7 +1,7 @@
 module ApplicationHelper
   def display_username
-    if admin_signed_in?
-      current_admin.email
+    if store_admin_signed_in?
+      current_store_admin.email
     elsif user_signed_in?
       current_user.email
     else

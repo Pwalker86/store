@@ -14,7 +14,7 @@
     <%= product.description %>
   </p>
 
-  <% if @active_user && !current_admin %>
+  <% if @active_user && !current_store_admin %>
     <%= button_to "Add to Order",
     user_cart_path(@active_user),
     params: {
@@ -28,7 +28,7 @@
     method: :patch,
     class: "button-link" %>
   <% end %>
-  <% if current_admin %>
+  <% if current_store_admin %>
     <%= button_to "Delete", product_path(product), method: :delete, class: "button-link" %>
     <div class="Product__Card__admin_links">
       <%= link_to "View", product, class: "button-link" %>

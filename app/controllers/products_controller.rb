@@ -68,8 +68,8 @@ class ProductsController < ApplicationController
   end
 
   def ensure_admin!
-    unless admin_signed_in?
-      flash[:alert] = "You must be an admin to access this page."
+    unless store_admin_signed_in?
+      flash[:alert] = "You must be a store admin to access this page."
       redirect_to pages_home_path
     end
   end

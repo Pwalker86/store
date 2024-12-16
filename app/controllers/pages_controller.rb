@@ -3,6 +3,6 @@ class PagesController < ApplicationController
     @stores = Store.all
     # below are just for current dev purposes
     @users = User.all
-    @admins = Admin.all
+    @admins = StoreAdmin.all
   end
 end
