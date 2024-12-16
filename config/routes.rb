@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :store_admins
 
+  namespace :store_admins do
+    resources :orders
+  end
+
   resources :user  do
     resource :cart, only: [ :show, :edit, :update, :destroy ] do
       get "checkout"
