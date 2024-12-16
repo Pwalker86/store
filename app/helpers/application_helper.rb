@@ -8,4 +8,12 @@ module ApplicationHelper
       "Guest - Not logged in"
     end
   end
+
+  def user_type
+    if current_store_admin
+      "store_admin"
+    elsif current_user
+      "user"
+    end
+  end
 end

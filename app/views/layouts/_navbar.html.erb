@@ -6,22 +6,16 @@
       <%= display_username %>
     </div>
     <div>
-      <%= link_to "View All Orders", store_admin_orders_path %>
-      <%#= link_to "View Products", store_products_path(@store) %>
+      <% if current_user || current_store_admin %>
+        <%= render "shared/#{user_type}_links", path: "orders_index" %>
+      <% end %>
     </div>
   </div>
   <div class="Navbar__Links col-right">
     <%= link_to "Home", root_path %>
-    <% if @active_user  && !current_store_admin %>
-      <%= link_to "My Cart: #{@cart.cart_item_totals}",
-      user_cart_path(@active_user),
-      params: {
-        user_entity: @active_user.class.name,
-      },
-      title: "View Order" %>
-    <% end %>
-    <% if @active_user && @active_user.is_a?(User) %>
-      <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+    <% if current_user || current_store_admin %>
+      <%= render "shared/#{user_type}_links", path: "cart_show" %>
+      <%= render "shared/#{user_type}_links", path: "log_out" %>
     <% end %>
   </div>
 </div>
