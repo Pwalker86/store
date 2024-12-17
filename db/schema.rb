@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_17_164138) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,14 +52,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
     t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "shipping_address", default: {}
-    t.bigint "guest_id"
-    t.index ["guest_id"], name: "index_orders_on_guest_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.string "orderable_type"
+    t.bigint "orderable_id"
+    t.index ["orderable_type", "orderable_id"], name: "index_orders_on_orderable"
   end
 
   create_table "products", force: :cascade do |t|
@@ -127,8 +126,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_10_204621) do
   add_foreign_key "carts", "users"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"
-  add_foreign_key "orders", "guests"
-  add_foreign_key "orders", "users"
   add_foreign_key "products", "stores"
   add_foreign_key "stores", "store_admins"
 end
