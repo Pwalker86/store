@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   end
 
   resources :stores do
-    resources :products
+    resources :products do
+      post "archive", as: "archive"
+    end
   end
 
   devise_for :users

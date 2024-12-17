@@ -12,7 +12,7 @@ module ApplicationHelper
   def user_type
     if current_store_admin
       "store_admin"
-    elsif current_user
+    else
       "user"
     end
   end

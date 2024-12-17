@@ -10,7 +10,7 @@ class ConvertCartToOrderService
   end
 
   def process
-    @order = @user.orders.new
+    @order = @user.orders.new(email: @address_params[:email])
     convert_cart_items
     set_guest_email
     update_status
@@ -55,9 +55,9 @@ class ConvertCartToOrderService
   # If the order has a guest user, it updates the guest's email
   # with the provided email from the address parameters and saves the guest user.
   def set_guest_email
-    if @order.guest.present?
-      @order.guest.email = @address_params[:email]
-      @order.guest.save!
+    if @order.orderable.is_a? Guest
+      @order.orderable.email = @address_params[:email]
+      @order.orderable.save!
     end
   end
 end
