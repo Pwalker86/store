@@ -29,12 +29,21 @@ class StoresController < ApplicationController
     end
   end
 
+  def remove_spotlight
+    @store = current_store_admin.store
+    if @store.spotlight.purge
+      redirect_to store_path(@store), notice: "spotlight has been removed"
+    else
+      redirect_to @store, alert: "something didn't work"
+    end
+  end
+
   def destroy
   end
 
   private
 
   def store_params
-    params.expect(store: [ :name, :email, :phone_number, :location, :mission_statement, :location ])
+    params.expect(store: [ :name, :email, :phone_number, :location, :mission_statement, :location, :spotlight ])
   end
 end

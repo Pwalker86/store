@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
 
   resources :stores do
+    post "remove_spotlight", as: "remove_spotlight"
     resources :products do
       post "archive", as: "archive"
     end

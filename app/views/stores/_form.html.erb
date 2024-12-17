@@ -36,7 +36,16 @@
   </div>
 
   <div>
+    <% form.label :spotlight %>
+    <%= form.file_field :spotlight %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
   <%= link_to "Cancel", stores_path, class: "btn btn--light" %>
+<% end %>
+<% if @store.spotlight.attached? %>
+  <div><%= image_tag @store.spotlight %></div>
+  <%= button_to "Remove Image", store_remove_spotlight_path(@store), method: :post %>
 <% end %>
