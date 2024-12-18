@@ -8,7 +8,7 @@ module StoreAdmins
 
     def show
       @order = Order.find(params[:id])
-      @scoped_order_items = @order.order_items.find_all { |item| item.product.store_id === current_store_admin.store.id }
+      @scoped_order_items = @order.scoped_order_items(current_store_admin.store.id)
     end
   end
 end
