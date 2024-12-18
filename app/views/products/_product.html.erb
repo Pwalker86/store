@@ -1,4 +1,7 @@
 <div class="Product__Card">
+  <% if product.archived %>
+    <span>Archived</span>
+  <% end %>
   <p>
     <strong>Name:</strong>
     <%= product.name %>
@@ -29,10 +32,12 @@
     class: "button-link" %>
   <% end %>
   <% if current_store_admin %>
-    <%= button_to "Delete", product_path(product), method: :delete, class: "button-link" %>
+    <%= button_to "Archive",
+    store_product_archive_path(@store, product),
+    class: "button-link" %>
     <div class="Product__Card__admin_links">
-      <%= link_to "View", product, class: "button-link" %>
-      <%= link_to "Edit", edit_product_path(product), class: "button-link" %>
+      <%= link_to "View", store_product_path(@store, product), class: "button-link" %>
+      <%= link_to "Edit", edit_store_product_path(@store, product), class: "button-link" %>
     </div>
   <% end %>
 </div>

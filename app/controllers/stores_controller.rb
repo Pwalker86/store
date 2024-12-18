@@ -1,23 +1,41 @@
 class StoresController < ApplicationController
+  before_action :authenticate_store_admin!, only: [ :new, :create, :edit, :update, :destroy ]
+
   def index
   end
 
   def show
-    # debugger
     @store = Store.find(params[:id])
-    @products = @store.products
+    @products = ProductDecorator.decorate_collection(@store.products.where(archived: false))
   end
 
   def new
+    @store = current_store_admin.store
   end
 
   def create
   end
 
   def edit
+    @store = current_store_admin.store
   end
 
   def update
+    store = current_store_admin.store
+    if store.update(store_params)
+      redirect_to store_path(store), notice: "Store has been updated!"
+    else
+      redirect_to edit_store_path store, alert: "Something went wrong"
+    end
+  end
+
+  def remove_spotlight
+    @store = current_store_admin.store
+    if @store.spotlight.purge
+      redirect_to store_path(@store), notice: "spotlight has been removed"
+    else
+      redirect_to @store, alert: "something didn't work"
+    end
   end
 
   def destroy
@@ -26,5 +44,6 @@ class StoresController < ApplicationController
   private
 
   def store_params
+    params.expect(store: [ :name, :email, :phone_number, :location, :mission_statement, :location, :spotlight ])
   end
 end

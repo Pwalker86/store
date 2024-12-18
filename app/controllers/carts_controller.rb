@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   def checkout
     @order = @active_user.orders.new
+    @email = @active_user.is_a?(User) ? @active_user.email : ""
   end
 
   def update

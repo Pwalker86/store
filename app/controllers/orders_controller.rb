@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
     user = order_params[:user_entity].constantize.find(order_params[:user_entity_id])
     cart = user.cart
     begin
-      ConvertCartToOrderService.new(cart, order_address_params, user).process
+      ConvertCartToOrderService.new(cart, order_params, user).process
       if @active_user.is_a? Guest
         redirect_to root_path
       elsif @active_user.is_a? User
@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
 
   def submit
     @order = Order.find(order_submit_params[:order_id])
-    if OrderSubmitService.new(@order, order_address_params).submit
+    if OrderSubmitService.new(@order, order_params).submit
       # Clear guest session. If the user needs to view their order,
       # they'll see it on the confirmation page or from the order id we provide them in an email
       session[:guest_id] = nil
@@ -53,9 +53,6 @@ class OrdersController < ApplicationController
     OrderDecorator.decorate_collection(@active_user.orders)
   end
 
-  def get_admin_orders
-  end
-
   def ensure_active_user
     redirect_to root_path, alert: "Cannot find user" unless @active_user
   end
@@ -66,9 +63,5 @@ class OrdersController < ApplicationController
 
   def order_submit_params
     params.require(:order).permit(:order_id)
-  end
-
-  def order_address_params
-    params.require(:order).permit(:address1, :address2, :city, :state, :postal_code, :email)
   end
 end

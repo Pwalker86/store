@@ -4,6 +4,10 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
 
+  def scoped_order_items(store_id)
+    self.order_items.find_all { |item| item.product.store_id === store_id }
+  end
+
   def destroy
     raise ActiveRecord::ReadOnlyRecord, "Orders cannot be destroyed"
   end
