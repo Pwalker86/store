@@ -6,6 +6,16 @@ RSpec.describe Order, type: :model do
     expect(open_order.open?).to eq(true)
   end
 
+    it "Order.destroy throws an exception" do
+      o = Order.create()
+      expect { o.destroy }.to raise_exception(ActiveRecord::ReadOnlyRecord, "Orders cannot be destroyed")
+    end
+
+    it "Order.destroy! throws an exception" do
+      o = Order.create()
+      expect { o.destroy! }.to raise_exception(ActiveRecord::ReadOnlyRecord, "Orders cannot be destroyed")
+    end
+
   context "shipping address" do
     order = Order.create(shipping_address: {
       address1: "123 Main St",

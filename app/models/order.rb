@@ -1,5 +1,4 @@
 class Order < ApplicationRecord
-  # TODO: add a different column for a unique, non-numerical, non-consecutive order id
   belongs_to :orderable, polymorphic: true
   has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
@@ -12,9 +11,9 @@ class Order < ApplicationRecord
     raise ActiveRecord::ReadOnlyRecord, "Orders cannot be destroyed"
   end
 
-  def destroy!
-    raise ActiveRecord::ReadOnlyRecord, "Orders cannot be destroyed"
-  end
+   def destroy!
+     raise ActiveRecord::ReadOnlyRecord, "Orders cannot be destroyed"
+   end
 
   ORDER_OPEN = "open"
   ORDER_PENDING = "pending"
